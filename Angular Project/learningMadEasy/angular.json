@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "learningMadEasy"
+    }
+  },
+  "defaultProject": "learningMadEasy",
+  "cli": {
+    "analytics": "33d3de48-ac64-4a5b-aed9-0597cfd2b52d"
+  }
 }
