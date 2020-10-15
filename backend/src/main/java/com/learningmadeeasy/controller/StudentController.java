@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learningmadeeasy.DAO.StudentDAOInterface;
 import com.learningmadeeasy.entity.Student;
 
-@RestController
-@RequestMapping("/")
+//@RestController
 public class StudentController {
 	
 	
