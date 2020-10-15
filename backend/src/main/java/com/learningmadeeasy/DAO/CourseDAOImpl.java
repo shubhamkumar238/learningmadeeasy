@@ -8,7 +8,6 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.learningmadeeasy.entity.Course;
 
@@ -32,7 +31,7 @@ public class CourseDAOImpl implements CourseDAOInterface {
 		return players;
 	}
 	
-
+	@Override
 	public Course showParticularCourse(int courseId) {
 		
 		//get the current hibernate session
@@ -41,6 +40,15 @@ public class CourseDAOImpl implements CourseDAOInterface {
 		Course theCourse = currentSession.get(Course.class, courseId);
 		
 		return theCourse;
+	}
+	
+	@Override
+	public void save(Course theCourse) {
+		
+		//get the current hibernate session
+		Session currentSession  = entityManager.unwrap(Session.class);
+		
+		currentSession.saveOrUpdate(theCourse);
 	}
 	
 

@@ -10,4 +10,6 @@ public interface CourseServiceInterface {
 
 	Course showParticularCourse(int courseId);
 
+	void save(Course theCourse);
+
 }

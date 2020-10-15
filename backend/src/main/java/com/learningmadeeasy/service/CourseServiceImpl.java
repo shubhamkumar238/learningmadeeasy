@@ -26,5 +26,11 @@ public class CourseServiceImpl implements CourseServiceInterface {
 	public Course showParticularCourse(int courseId) {
 		return courseDAOImpl.showParticularCourse(courseId);
 	}
+	
+	@Override
+	@Transactional
+	public void save(Course theCourse) {
+		courseDAOImpl.save(theCourse);
+	}
 
 }
