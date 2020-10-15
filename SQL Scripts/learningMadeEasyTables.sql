@@ -7,8 +7,7 @@ USE `learning_made_easy`;
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
   `student_id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) DEFAULT NULL,
-  `last_name` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
