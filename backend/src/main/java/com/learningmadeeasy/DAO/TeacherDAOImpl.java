@@ -23,5 +23,18 @@ public class TeacherDAOImpl implements TeacherDAOInterface {
 		currentSession.saveOrUpdate(theTeacher);
 		
 	}
+	
+	@Override
+	public Teacher findTeacherById(int teacherId) {
+		
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		// get the Teacher
+		Teacher theTeacher  = currentSession.get(Teacher.class, teacherId);
+		
+		return theTeacher;
+		
+	}
 
 }

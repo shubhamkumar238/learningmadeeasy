@@ -1,6 +1,7 @@
 package com.learningmadeeasy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.learningmadeeasy.entity.Course;
 
@@ -10,6 +11,6 @@ public interface CourseServiceInterface {
 
 	Course showParticularCourse(int courseId);
 
-	void save(Course theCourse);
+	void saveNewCourse(Map<String, ?> theCourse);
 
 }

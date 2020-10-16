@@ -1,6 +1,7 @@
 package com.learningmadeeasy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import com.learningmadeeasy.entity.Course;
 
@@ -10,7 +11,9 @@ public interface CourseDAOInterface {
 
 	Course showParticularCourse(int courseId);
 
-	void save(Course theCourse);
+	void saveNewCourse(Map<String, ?> theCourse);
+
+	
 	
 
 }

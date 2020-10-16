@@ -6,4 +6,6 @@ public interface TeacherServiceInterface {
 
 	void save(Teacher theTeacher);
 
+	Teacher findTeacherById(int TeacherId);
+
 }

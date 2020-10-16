@@ -16,15 +16,7 @@ public class TeacherController {
 	
 	@Autowired
 	private TeacherServiceInterface teacherserviceinterface;
-	
-	//added /home mapping
-	
-	@GetMapping("/home")
-	public String home() {
-		System.out.println("AGAIN testing eclipse pushing!");
-		return "working";
-	}
-	
+
 	@PostMapping("/teachers")
 	public Teacher createTeacher(@RequestBody Teacher theTeacher) {
 		

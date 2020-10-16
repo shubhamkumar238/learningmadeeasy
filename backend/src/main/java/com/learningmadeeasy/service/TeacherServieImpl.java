@@ -19,6 +19,12 @@ public class TeacherServieImpl implements TeacherServiceInterface {
 		teacherDAOInterface.save(theTeacher);
 	}
 	
+	@Override
+	@Transactional
+	public Teacher findTeacherById(int teacherId) {
+		return teacherDAOInterface.findTeacherById(teacherId);
+	}
+	
 	
 
 }
