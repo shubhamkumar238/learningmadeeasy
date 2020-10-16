@@ -17,6 +17,12 @@ public class TeacherController {
 	@Autowired
 	private TeacherServiceInterface teacherserviceinterface;
 	
+	@GetMapping("/home")
+	public String home() {
+		System.out.println("working");
+		return "working";
+	}
+	
 	@PostMapping("/teachers")
 	public Teacher createTeacher(@RequestBody Teacher theTeacher) {
 		
