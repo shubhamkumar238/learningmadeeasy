@@ -22,7 +22,6 @@ public class TeacherController {
 		System.out.println("working");
 		return "working";
 	}
-
 	
 	@PostMapping("/teachers")
 	public Teacher createTeacher(@RequestBody Teacher theTeacher) {
@@ -30,7 +29,7 @@ public class TeacherController {
 		// also just in case they pass an id in JSON ... set id to 0
 		// this is to force a save of new item ... instead of update
 		
-		theTeacher.setId(0);
+		theTeacher.setTeacherId(0);
 		
 		teacherserviceinterface.save(theTeacher);
 		
