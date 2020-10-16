@@ -19,40 +19,68 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="student_id")
-	private int student_id;
+	private int studentId;
 	
 	@Column(name="name")
 	private String name;
 	
 	@Column(name="email")
-	private String student_email;
+	private String email;
 	
 	
 	@ManyToMany
 	@JoinTable(
 			name="course_student",
-			joinColumns=@JoinColumn(name="student_id"),
-			inverseJoinColumns=@JoinColumn(name="course_id")
+			joinColumns=@JoinColumn(name="studentId"),
+			inverseJoinColumns=@JoinColumn(name="courseId")
 			)	
 	private List<Course> courses;
-	
 
-	public Student(int student_id, String name, String student_email) {
-		this.student_id = student_id;
-		this.name = name;
-		this.student_email = student_email;
-	}
-	
 	public Student() {
 		
 	}
-
-	public Student(String name, String student_email) {
+	
+	public Student(String name, String email) {
 		this.name = name;
-		this.student_email = student_email;
+		this.email = email;
 	}
-	
-	
-	
+
+	public int getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", name=" + name + ", email=" + email + ", courses=" + courses + "]";
+	}
+
 	
 }

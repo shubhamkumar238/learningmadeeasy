@@ -74,7 +74,7 @@ CREATE TABLE `video` (
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rating` int(11) DEFAULT NULL,
+  `course_rating` int(11) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL,
   
    PRIMARY KEY (`id`),
@@ -96,7 +96,7 @@ CREATE TABLE `timestamp` (
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question` (
   `question_id` int(11) NOT NULL AUTO_INCREMENT,
-  `question` varchar(200) NOT NULL,
+  `problem` varchar(200) NOT NULL,
   `course_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`question_id`),
   
@@ -109,7 +109,7 @@ DROP TABLE IF EXISTS `answer`;
 CREATE TABLE `answer` (
   `answer_id` int(11) NOT NULL AUTO_INCREMENT,
   `question_id` int(11) NOT NULL,
-  `answer` varchar(400) NOT NULL,
+  `response` varchar(400) NOT NULL,
   `course_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`answer_id`),
   
