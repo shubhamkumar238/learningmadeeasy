@@ -17,9 +17,11 @@ public class TeacherController {
 	@Autowired
 	private TeacherServiceInterface teacherserviceinterface;
 	
+	//added /home mapping
+	
 	@GetMapping("/home")
 	public String home() {
-		System.out.println("working");
+		System.out.println("testing eclipse pushing!");
 		return "working";
 	}
 	
