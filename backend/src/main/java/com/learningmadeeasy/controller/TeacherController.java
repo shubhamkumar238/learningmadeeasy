@@ -21,7 +21,7 @@ public class TeacherController {
 	
 	@GetMapping("/home")
 	public String home() {
-		System.out.println("testing eclipse pushing!");
+		System.out.println("AGAIN testing eclipse pushing!");
 		return "working";
 	}
 	
