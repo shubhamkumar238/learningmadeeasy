@@ -13,7 +13,7 @@ import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Teacher;
 import com.learningmadeeasy.service.CourseServiceInterface;
 
-/*@RestController
+@RestController
 @RequestMapping("/")
 public class CourseController {
 	
@@ -34,15 +34,15 @@ public class CourseController {
 	@PostMapping("/courses")
 	public int CreateCourse(@RequestBody Course theCourse, int teacherId) {
 		
-		theCourse.setCourse_id(0);
+		theCourse.setCourseId(0);
 		
 		courseserviceinterface.save(theCourse);
 		
-		return theCourse.getCourse_id();
+		return theCourse.getCourseId();
 		
 		
 	}
 	
 	
 	
-}*/
+}

@@ -51,6 +51,4 @@ public class CourseDAOImpl implements CourseDAOInterface {
 		currentSession.saveOrUpdate(theCourse);
 	}
 	
-
-
 }
