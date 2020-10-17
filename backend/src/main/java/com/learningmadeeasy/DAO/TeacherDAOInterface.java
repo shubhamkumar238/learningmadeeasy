@@ -6,4 +6,6 @@ public interface TeacherDAOInterface {
 
 	void save(Teacher theTeacher);
 
+	Teacher findTeacherById(int teacherId);
+
 }

@@ -1,6 +1,7 @@
 package com.learningmadeeasy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learningmadeeasy.entity.Course;
+import com.learningmadeeasy.entity.Teacher;
 
 @Repository
 public class CourseDAOImpl implements CourseDAOInterface {
@@ -41,16 +43,34 @@ public class CourseDAOImpl implements CourseDAOInterface {
 		
 		return theCourse;
 	}
-	
+
 	@Override
-	public void save(Course theCourse) {
+	public int saveNewCourse(Map<String, ?> theCourse) {
 		
 		//get the current hibernate session
-		Session currentSession  = entityManager.unwrap(Session.class);
+		Session currentSession = entityManager.unwrap(Session.class);
 		
-		currentSession.saveOrUpdate(theCourse);
+		Course newCourse = new Course();
+		
+		Query query = entityManager.createQuery("from Teacher where teacherId=:teacherId");
+		query.setParameter("teacherId",(Integer) theCourse.get("teacherId"));
+		
+		Teacher theTeacher = (Teacher) query.getSingleResult();
+		
+		newCourse.setTeacher(theTeacher);
+		
+		newCourse.setCourseName((String)theCourse.get("courseName"));
+		
+		int generatedCourseId = (Integer) currentSession.save(newCourse);
+		
+		System.out.println("Generated Course Id- " + generatedCourseId);
+		
+		return newCourse.getCourseId();
+
 	}
+
+
 	
-
-
+	
+	
 }

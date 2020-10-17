@@ -1,7 +1,11 @@
 package com.learningmadeeasy.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,14 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learningmadeeasy.entity.Course;
-import com.learningmadeeasy.entity.Teacher;
 import com.learningmadeeasy.service.CourseServiceInterface;
+import com.learningmadeeasy.service.TeacherServiceInterface;
 
-/*@RestController
+@RestController
 @RequestMapping("/")
 public class CourseController {
 	
+	@Autowired
 	private CourseServiceInterface courseserviceinterface;
+	
+	@Autowired
+	private TeacherServiceInterface teacherserviceinterface;
+	
+	@Autowired
+	private EntityManager entityManager;
 	
 	
 	@GetMapping("/courses")
@@ -32,17 +43,12 @@ public class CourseController {
 	}
 	
 	@PostMapping("/courses")
-	public int CreateCourse(@RequestBody Course theCourse, int teacherId) {
+	public int CreateCourse(@RequestBody Map<String,?> theCourse) {
 		
-		theCourse.setCourse_id(0);
-		
-		courseserviceinterface.save(theCourse);
-		
-		return theCourse.getCourse_id();
-		
+		return courseserviceinterface.saveNewCourse(theCourse);
 		
 	}
 	
 	
 	
-}*/
+}
