@@ -17,8 +17,6 @@ import javax.persistence.Table;
 @Table(name="student")
 public class Student {
 	
-	
-	//testing
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="student_id")
