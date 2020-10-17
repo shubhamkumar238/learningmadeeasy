@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="course")
 public class Course {
@@ -26,14 +30,18 @@ public class Course {
 	
 	@Column(name="course_name")
 	private String courseName;
-		
+	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
 	
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy="course")
 	private List<Question> questions;
 	
+	@JsonIgnore
 	@ManyToMany()
 	@JoinTable(
 			name="course_student",
@@ -42,13 +50,15 @@ public class Course {
 			)
 	private List<Student> students;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="course")
 	private List<Answer> answers;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="course")
 	private List<Video> videos;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="course")
 	private List<Rating> ratings;
 	
@@ -124,7 +134,7 @@ public class Course {
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
 	}
-	
+  
 	public void addStudent(Student theStudent) {
 		
 		if (students == null) {
@@ -133,5 +143,4 @@ public class Course {
 		
 		students.add(theStudent);
 	}
-	
 }
