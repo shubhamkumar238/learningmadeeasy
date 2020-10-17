@@ -10,5 +10,7 @@ public interface TeacherServiceInterface {
 	void save(Teacher theTeacher);
 
 	List<Course> allCoursesOfTeacher(int teacherId);
+  
+  Teacher findTeacherById(int TeacherId);
 
 }
