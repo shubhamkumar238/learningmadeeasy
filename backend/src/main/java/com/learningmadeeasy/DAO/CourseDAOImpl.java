@@ -45,7 +45,7 @@ public class CourseDAOImpl implements CourseDAOInterface {
 	}
 
 	@Override
-	public void saveNewCourse(Map<String, ?> theCourse) {
+	public int saveNewCourse(Map<String, ?> theCourse) {
 		
 		//get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
@@ -64,6 +64,8 @@ public class CourseDAOImpl implements CourseDAOInterface {
 		int generatedCourseId = (Integer) currentSession.save(newCourse);
 		
 		System.out.println("Generated Course Id- " + generatedCourseId);
+		
+		return newCourse.getCourseId();
 
 	}
 

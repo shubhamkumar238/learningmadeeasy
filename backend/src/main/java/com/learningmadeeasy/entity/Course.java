@@ -1,5 +1,6 @@
 package com.learningmadeeasy.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,8 +37,8 @@ public class Course {
 	@ManyToMany()
 	@JoinTable(
 			name="course_student",
-			joinColumns=@JoinColumn(name="courseId"),
-			inverseJoinColumns=@JoinColumn(name="studentId")
+			joinColumns=@JoinColumn(name="course_id"),
+			inverseJoinColumns=@JoinColumn(name="student_id")
 			)
 	private List<Student> students;
 	
@@ -122,6 +123,15 @@ public class Course {
 
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
+	}
+	
+	public void addStudent(Student theStudent) {
+		
+		if (students == null) {
+			students = new ArrayList<>();
+		}
+		
+		students.add(theStudent);
 	}
 	
 }

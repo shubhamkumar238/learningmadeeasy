@@ -29,8 +29,8 @@ public class CourseServiceImpl implements CourseServiceInterface {
 	}
 
 	@Override
-	public void saveNewCourse(Map<String, ?> theCourse) {
-		courseDAOInterface.saveNewCourse(theCourse);
+	public int saveNewCourse(Map<String, ?> theCourse) {
+		return courseDAOInterface.saveNewCourse(theCourse);
 	}
 	
 

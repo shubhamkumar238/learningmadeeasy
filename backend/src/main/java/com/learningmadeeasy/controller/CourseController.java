@@ -44,12 +44,8 @@ public class CourseController {
 	
 	@PostMapping("/courses")
 	public int CreateCourse(@RequestBody Map<String,?> theCourse) {
-
 		
-		courseserviceinterface.saveNewCourse(theCourse);
-		
-		return 0;
-		
+		return courseserviceinterface.saveNewCourse(theCourse);
 		
 	}
 	

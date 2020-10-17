@@ -1,5 +1,6 @@
 package com.learningmadeeasy.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,6 +17,8 @@ import javax.persistence.Table;
 @Table(name="student")
 public class Student {
 	
+	
+	//testing
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="student_id")
@@ -31,8 +34,8 @@ public class Student {
 	@ManyToMany
 	@JoinTable(
 			name="course_student",
-			joinColumns=@JoinColumn(name="studentId"),
-			inverseJoinColumns=@JoinColumn(name="courseId")
+			joinColumns=@JoinColumn(name="student_id"),
+			inverseJoinColumns=@JoinColumn(name="course_id")
 			)	
 	private List<Course> courses;
 
@@ -80,6 +83,15 @@ public class Student {
 	@Override
 	public String toString() {
 		return "Student [studentId=" + studentId + ", name=" + name + ", email=" + email + ", courses=" + courses + "]";
+	}
+	
+	public void addCourse(Course theCourse) {
+		
+		if (courses == null) {
+			courses = new ArrayList<>();
+		}
+		
+		courses.add(theCourse);
 	}
 
 	

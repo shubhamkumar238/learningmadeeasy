@@ -11,6 +11,6 @@ public interface CourseServiceInterface {
 
 	Course showParticularCourse(int courseId);
 
-	void saveNewCourse(Map<String, ?> theCourse);
+	int saveNewCourse(Map<String, ?> theCourse);
 
 }
