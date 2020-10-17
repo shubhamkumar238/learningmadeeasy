@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="video")
 public class Video {
@@ -15,6 +17,7 @@ public class Video {
 	@Column(name="video_url")
 	private int videoUrl;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="course_id")
 	private Course course;

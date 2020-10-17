@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="student")
 public class Student {
@@ -27,7 +29,7 @@ public class Student {
 	@Column(name="email")
 	private String email;
 	
-	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name="course_student",
