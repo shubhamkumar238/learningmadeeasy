@@ -9,11 +9,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="answer")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="answerId")
 public class Answer {
 	
 	@Id
@@ -21,17 +22,14 @@ public class Answer {
 	@Column(name="answer_id")
 	private int answerId;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="question_id")
 	private Question problem;
 	
-	@JsonIgnore
+	
 	@Column(name="response")
 	private String response;
-	
-	@ManyToOne
-	@JoinColumn(name="course_id")
-	private Course course;
 	
 	public Answer() {
 		
@@ -65,18 +63,9 @@ public class Answer {
 		this.response = response;
 	}
 
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
-
 	@Override
 	public String toString() {
-		return "Answer [answerId=" + answerId + ", problem=" + problem + ", response=" + response + ", course=" + course
-				+ "]";
+		return "Answer [answerId=" + answerId + ", problem=" + problem + ", response=" + response + "]";
 	}
 	
 }

@@ -73,11 +73,11 @@ CREATE TABLE `video` (
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rating_id` int(11) NOT NULL AUTO_INCREMENT,
   `course_rating` int(11) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL,
   
-   PRIMARY KEY (`id`),
+   PRIMARY KEY (`rating_id`),
    
    CONSTRAINT `FK_COURSE3` FOREIGN KEY (`course_id`) 
    REFERENCES `course` (`course_id`) 
@@ -110,7 +110,6 @@ CREATE TABLE `answer` (
   `answer_id` int(11) NOT NULL AUTO_INCREMENT,
   `question_id` int(11) NOT NULL,
   `response` varchar(400) NOT NULL,
-  `course_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`answer_id`),
   
   CONSTRAINT `FK_QUESTION` FOREIGN KEY (`question_id`) 

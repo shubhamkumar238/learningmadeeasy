@@ -7,16 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="question")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="questionId")
 public class Question {
 	
 	@Id
@@ -27,12 +26,7 @@ public class Question {
 	@Column(name="problem")
 	private String problem;
 	
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name="course_id")
-	private Course course;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="problem")
 	private List<Answer> answers;
 	
@@ -60,14 +54,6 @@ public class Question {
 		this.problem = problem;
 	}
 
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
-
 	public List<Answer> getAnswers() {
 		return answers;
 	}
@@ -78,7 +64,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [questionId=" + questionId + ", problem=" + problem + ", course=" + course + ", answers="
+		return "Question [questionId=" + questionId + ", problem=" + problem + ", answers="
 				+ answers + "]";
 	}
 	

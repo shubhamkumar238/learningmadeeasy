@@ -7,15 +7,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="video")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="videoUrl")
 public class Video {
 	
 	@Id
 	@Column(name="video_url")
-	private int videoUrl;
+	private String videoUrl;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -26,16 +29,15 @@ public class Video {
 		
 	}
 	
-	public Video(int videoUrl, Course course) {
+	public Video(String videoUrl) {
 		this.videoUrl = videoUrl;
-		this.course = course;
 	}
 
-	public int getVideoUrl() {
+	public String getVideoUrl() {
 		return videoUrl;
 	}
 
-	public void setVideoUrl(int videoUrl) {
+	public void setVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl;
 	}
 
@@ -46,7 +48,7 @@ public class Video {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Video [videoUrl=" + videoUrl + ", course=" + course + "]";
