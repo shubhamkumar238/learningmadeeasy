@@ -9,7 +9,6 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Student;

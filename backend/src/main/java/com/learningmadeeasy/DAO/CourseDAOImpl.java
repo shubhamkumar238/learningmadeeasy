@@ -19,6 +19,7 @@ public class CourseDAOImpl implements CourseDAOInterface {
 	@Autowired
 	private EntityManager entityManager;
 		
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Course> showAllCourses(){
 		
@@ -28,9 +29,9 @@ public class CourseDAOImpl implements CourseDAOInterface {
 		Query theQuery = currentSession.createQuery("from Course", Course.class);
 		
 		//execute query and get result list
-		List<Course> players = theQuery.getResultList();
+		List<Course> courses = theQuery.getResultList();
 		
-		return players;
+		return courses;
 	}
 	
 	@Override

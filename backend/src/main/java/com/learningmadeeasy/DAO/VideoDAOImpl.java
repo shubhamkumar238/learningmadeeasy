@@ -1,6 +1,7 @@
 package com.learningmadeeasy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -9,6 +10,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Video;
 
 @Repository
@@ -18,30 +20,35 @@ public class VideoDAOImpl implements VideoDAOInterface {
 	private EntityManager entityManager;
 	
 	@Override
-	public void saveTheVideo(Video video) {
+	public void saveTheVideo(Map<String, ?> video) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		currentSession.saveOrUpdate(video);
+		
+		String videoUrl = (String) video.get("video_url");
+		int courseId = (int)video.get("course_id");
+		
+		Course currentCourse = currentSession.get(Course.class, courseId);
+		
+		Video videoObject = new Video(videoUrl);
+		currentSession.save(videoObject);
+		currentCourse.addVideo(videoObject);
+	}
+
+	@Override
+	public List<Video> theCourseVideo(int courseId) {
+		
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		Course currentCourse = currentSession.get(Course.class, courseId);
+		List<Video> response = currentCourse.getVideos();
+		return response;
+
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<String> theCourseVideo(int courseId) {
-		List<String> responseList = null;
-		
-		Query query = entityManager.createQuery("select videoUrl from Video where courseId=:courseId");
-		query.setParameter("courseId", courseId);	
-		
-		responseList = query.getResultList();
-		return responseList;
-
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Integer> getAllCourses() {
-		List<Integer> responseList = null;
-		Query query = entityManager.createQuery("select courseId from Course");
-		responseList = query.getResultList();
+	public List<Course> getAllCourses() {
+		Query query = entityManager.createQuery("select c from Course c", Course.class);
+		List<Course> responseList = query.getResultList();
 		return responseList;
 	}
 
