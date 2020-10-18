@@ -25,9 +25,6 @@ public class CourseController {
 	@Autowired
 	private CourseServiceInterface courseserviceinterface;
 	
-	@Autowired
-	private TeacherServiceInterface teacherserviceinterface;
-	
 	
 	@GetMapping("/courses")
 	public List<Course> ShowAllCourses(){
