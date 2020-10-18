@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="rating")
 public class Rating {
@@ -21,6 +23,7 @@ public class Rating {
 	@Column(name="course_rating")
 	private int courseRating;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="course_id")
 	private Course course;

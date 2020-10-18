@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="answer")
 public class Answer {
@@ -22,7 +25,8 @@ public class Answer {
 	@JoinColumn(name="question_id")
 	private Question problem;
 	
-	@Column(name="answer")
+	@JsonIgnore
+	@Column(name="response")
 	private String response;
 	
 	@ManyToOne

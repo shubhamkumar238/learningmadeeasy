@@ -1,17 +1,22 @@
+
 package com.learningmadeeasy.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Teacher;
 import com.learningmadeeasy.service.TeacherServiceInterface;
 
 @RestController
-@RequestMapping("/")
 public class TeacherController {
 	
 	@Autowired
@@ -29,6 +34,12 @@ public class TeacherController {
 		
 		
 		return theTeacher;
-				
 	}
+	
+	@GetMapping("/teachersCourses/{teacherId}")
+	public List<Course> allCoursesOfTeacher(@PathVariable int teacherId){
+		return teacherserviceinterface.allCoursesOfTeacher(teacherId);
+	}
+	
 }
+
