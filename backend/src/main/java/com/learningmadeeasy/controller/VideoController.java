@@ -1,6 +1,7 @@
 package com.learningmadeeasy.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Video;
 import com.learningmadeeasy.service.VideoServiceInterface;
 
@@ -21,17 +23,17 @@ public class VideoController {
 	private VideoServiceInterface videoServiceInterface;
 	
 	@PostMapping("/uploadVideo")
-	public void videoUploadfn(@RequestBody Video video){
+	public void videoUploadfn(@RequestBody Map<String, ?> video){
 		videoServiceInterface.saveTheVideo(video);
 	}
 	
 	@GetMapping("/courseVideos/{courseId}")
-	public List<String> theCourseVideo( @PathVariable int courseId){
+	public List<Video> theCourseVideo( @PathVariable int courseId){
 		return videoServiceInterface.theCourseVideo(courseId);
 	}
 	
 	@GetMapping("/allCourses")
-	public List<Integer> allCourses(){
+	public List<Course> allCourses(){
 		return videoServiceInterface.getAllCourses();
 	}
 }

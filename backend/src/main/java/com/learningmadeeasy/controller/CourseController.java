@@ -3,8 +3,6 @@ package com.learningmadeeasy.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +27,6 @@ public class CourseController {
 	
 	@Autowired
 	private TeacherServiceInterface teacherserviceinterface;
-	
-	@Autowired
-	private EntityManager entityManager;
 	
 	
 	@GetMapping("/courses")

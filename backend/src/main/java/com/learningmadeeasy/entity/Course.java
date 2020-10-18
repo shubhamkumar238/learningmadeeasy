@@ -15,12 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="course")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="courseId")
 public class Course {
 	
 	@Id
@@ -31,17 +31,17 @@ public class Course {
 	@Column(name="course_name")
 	private String courseName;
 	
-	@JsonBackReference
+	
 	@ManyToOne
 	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
 	
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy="course")
+	@OneToMany
+	@JoinColumn(name="course_id") // Uni-directional mapping
 	private List<Question> questions;
 	
-	@JsonIgnore
+	
 	@ManyToMany()
 	@JoinTable(
 			name="course_student",
@@ -50,16 +50,13 @@ public class Course {
 			)
 	private List<Student> students;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="course")
-	private List<Answer> answers;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="course")
 	private List<Video> videos;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="course")
+	
+	@OneToMany
+	@JoinColumn(name="course_id")
 	private List<Rating> ratings;
 	
 	
@@ -111,14 +108,6 @@ public class Course {
 		this.students = students;
 	}
 
-	public List<Answer> getAnswers() {
-		return answers;
-	}
-
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
-	}
-
 	public List<Video> getVideos() {
 		return videos;
 	}
@@ -134,7 +123,17 @@ public class Course {
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
 	}
-  
+	
+	public void addVideo(Video newVideo) {
+		
+		if (videos == null) {
+			videos = new ArrayList<>();
+		}
+		
+		videos.add(newVideo);
+		newVideo.setCourse(this);
+	}
+	
 	public void addStudent(Student theStudent) {
 		
 		if (students == null) {
@@ -142,5 +141,7 @@ public class Course {
 		}
 		
 		students.add(theStudent);
+		
+		// question here as why not students.setCourse()???
 	}
 }
