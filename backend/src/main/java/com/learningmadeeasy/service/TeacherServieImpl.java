@@ -26,7 +26,7 @@ public class TeacherServieImpl implements TeacherServiceInterface {
 	@Transactional
 	public List<Course> allCoursesOfTeacher(int teacherId) {
 		return teacherDAOInterface.allCoursesOfTeacher(teacherId);
-  }
+    }
 
 	@Override
 	public Teacher findTeacherById(int TeacherId) {
