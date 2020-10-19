@@ -45,15 +45,11 @@ public class StudentDAOImpl implements StudentDAOInterface {
 		Course theCourse = (Course) query.getSingleResult();
 		
 		newStudent.setStudentId((Integer) theStudent.get("studentId"));
-		
 		newStudent.setName((String) theStudent.get("studentName"));
-		
 		newStudent.setEmail((String) theStudent.get("email"));
-		
 		newStudent.addCourse(theCourse);
 		
 		currentSession.save(newStudent);
-		
 		System.out.println(newStudent);
 		
 		return newStudent.getStudentId();
