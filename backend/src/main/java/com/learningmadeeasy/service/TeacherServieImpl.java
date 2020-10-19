@@ -28,4 +28,10 @@ public class TeacherServieImpl implements TeacherServiceInterface {
 		return teacherDAOInterface.allCoursesOfTeacher(teacherId);
   }
 
+	@Override
+	public Teacher findTeacherById(int TeacherId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
