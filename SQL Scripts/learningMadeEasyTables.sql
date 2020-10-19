@@ -7,8 +7,7 @@ USE `learning_made_easy`;
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
   `student_id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) DEFAULT NULL,
-  `last_name` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -74,11 +73,11 @@ CREATE TABLE `video` (
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rating` int(11) DEFAULT NULL,
+  `rating_id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_rating` int(11) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL,
   
-   PRIMARY KEY (`id`),
+   PRIMARY KEY (`rating_id`),
    
    CONSTRAINT `FK_COURSE3` FOREIGN KEY (`course_id`) 
    REFERENCES `course` (`course_id`) 
@@ -97,7 +96,7 @@ CREATE TABLE `timestamp` (
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question` (
   `question_id` int(11) NOT NULL AUTO_INCREMENT,
-  `question` varchar(200) NOT NULL,
+  `problem` varchar(200) NOT NULL,
   `course_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`question_id`),
   
@@ -110,8 +109,7 @@ DROP TABLE IF EXISTS `answer`;
 CREATE TABLE `answer` (
   `answer_id` int(11) NOT NULL AUTO_INCREMENT,
   `question_id` int(11) NOT NULL,
-  `answer` varchar(400) NOT NULL,
-  `course_id` int(11) DEFAULT NULL,
+  `response` varchar(400) NOT NULL,
   PRIMARY KEY (`answer_id`),
   
   CONSTRAINT `FK_QUESTION` FOREIGN KEY (`question_id`) 
