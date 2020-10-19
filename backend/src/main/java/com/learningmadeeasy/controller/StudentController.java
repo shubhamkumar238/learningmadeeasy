@@ -26,9 +26,10 @@ public class StudentController {
 	private void save(@RequestBody Student theStudent) {
 		studentServiceInterface.save(theStudent);
 	}
-		
-	@PostMapping("/{studentId}/{courseId}")
-	public void createStudent(@PathVariable int studentId, @PathVariable int courseId) {
+	
+	///future requirements
+	@GetMapping("/{studentId}/{courseId}")
+	public void linkStudentWithCourse(@PathVariable int studentId, @PathVariable int courseId) {
 		
 		studentServiceInterface.savecourseforstudent(studentId,courseId);
 		
