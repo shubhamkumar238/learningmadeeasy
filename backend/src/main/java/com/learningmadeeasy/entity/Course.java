@@ -56,8 +56,8 @@ public class Course {
 	
 	
 	@OneToMany
-	@JoinColumn(name="course_id")
-	private List<Rating> ratings;
+	@JoinColumn(name="course_id") 
+	private List<Rating> ratings; 
 	
 	
 	public Course() {
