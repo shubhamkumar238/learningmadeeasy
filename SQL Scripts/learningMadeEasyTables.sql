@@ -12,13 +12,29 @@ CREATE TABLE `student` (
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `teacher_details`;
+CREATE TABLE `teacher_details` (
+  `teacher_details_id` int(11) NOT NULL AUTO_INCREMENT,
+  `about` varchar(400) NOT NULL,
+  `achievements` varchar(400) NOT NULL,
+  `myobjectives` varchar(400) NOT NULL,
+  `expert_category` varchar(400) NOT NULL,
+  `extra_category` varchar(400) NOT NULL,
+  PRIMARY KEY (`teacher_details_id`)
+  
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `teacher_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`teacher_id`)
+  `teacher_detail_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`teacher_id`),
+  
+  CONSTRAINT `FK_TEACHER_DETAILS` 
+  FOREIGN KEY (`teacher_detail_id`) 
+  REFERENCES `teacher_details` (`teacher_details_id`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `course`;
@@ -116,3 +132,6 @@ CREATE TABLE `answer` (
   REFERENCES `question` (`question_id`) 
   ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+
+
