@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -33,6 +35,10 @@ public class Teacher {
 	@JsonIgnore
 	@OneToMany(mappedBy="teacher")
 	private List<Course> courses;
+	
+	@OneToOne
+	@JoinColumn(name="teacher_details_id")
+	private Teacher_Details teacher_details;
 
 	
 	public int getTeacherId() {
