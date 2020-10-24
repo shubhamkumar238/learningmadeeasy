@@ -5,18 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="teacher_details")
-public class Teacher_Details {
+public class TeacherDetails {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="teacher_details_id")
-	private int teacher_details_id;
+	private int teacherDetailsId;
 	
 	@Column(name="about")
 	private String about;
@@ -28,27 +26,26 @@ public class Teacher_Details {
 	private String myobjectives;
 	
 	@Column(name="expert_category")
-	private String expert_category;
+	private String expertCategory;
 	
 	@Column(name="extra_category")
-	private String extra_category;
+	private String extraCategory; // stored as @@ strategy
 	
-	@OneToOne(mappedBy ="teacher_details")
-	private Teacher teacher;
 	
-	public Teacher_Details() {
+	public TeacherDetails() {
 		
 	}
 	
-
-	public Teacher_Details(String about, String achievements, String myobjectives,
-			String expert_category, String extra_category) {
+	public TeacherDetails(int teacherDetailsId, String about, String achievements, String myobjectives,
+			String expertCategory, String extraCategory) {
+		this.teacherDetailsId = teacherDetailsId;
 		this.about = about;
 		this.achievements = achievements;
 		this.myobjectives = myobjectives;
-		this.expert_category = expert_category;
-		this.extra_category = extra_category;
+		this.expertCategory = expertCategory;
+		this.extraCategory = extraCategory;
 	}
+
 
 	public String getAbout() {
 		return about;
@@ -74,30 +71,32 @@ public class Teacher_Details {
 		this.myobjectives = myobjectives;
 	}
 
-	public String getExpert_category() {
-		return expert_category;
-	}
 
-	public void setExpert_category(String expert_category) {
-		this.expert_category = expert_category;
-	}
-
-	public String getExtra_category() {
-		return extra_category;
-	}
-
-	public void setExtra_category(String extra_category) {
-		this.extra_category = extra_category;
+	public int getTeacherDetailsId() {
+		return teacherDetailsId;
 	}
 
 
-	@Override
-	public String toString() {
-		return "Teacher_Details [teacher_details_id=" + teacher_details_id + ", about=" + about + ", achievements="
-				+ achievements + ", myobjectives=" + myobjectives + ", expert_category=" + expert_category
-				+ ", extra_category=" + extra_category + "]";
+	public void setTeacherDetailsId(int teacherDetailsId) {
+		this.teacherDetailsId = teacherDetailsId;
 	}
-	
-	
+
+
+	public String getExpertCategory() {
+		return expertCategory;
+	}
+
+
+	public void setExpertCategory(String expertCategory) {
+		this.expertCategory = expertCategory;
+	}
+
+	public String getExtraCategory() {
+		return extraCategory;
+	}
+
+	public void setExtraCategory(String extraCategory) {
+		this.extraCategory = extraCategory;
+	}
 
 }
