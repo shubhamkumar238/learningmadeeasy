@@ -18,8 +18,8 @@ CREATE TABLE `teacher_details` (
   `about` varchar(400) NOT NULL,
   `achievements` varchar(400) NOT NULL,
   `myobjectives` varchar(400) NOT NULL,
-  `expert_category` varchar(400) NOT NULL,
-  `extra_category` varchar(400) NOT NULL,
+  `expert_category` varchar(45) NOT NULL,
+  `extra_category` varchar(150) NOT NULL,
   PRIMARY KEY (`teacher_details_id`)
   
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -37,11 +37,21 @@ CREATE TABLE `teacher` (
   REFERENCES `teacher_details` (`teacher_details_id`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `course_category`;
+CREATE TABLE `course_category` (
+  `course_category_name` varchar(45) NOT NULL,
+  `course_url` varchar(45) NOT NULL,
+  PRIMARY KEY (`course_category_name`)
+ 
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
   `course_id` int(11) NOT NULL AUTO_INCREMENT,
   `course_name` varchar(45) DEFAULT NULL,
   `teacher_id` int(11) DEFAULT NULL,
+  `course_category` varchar(45) DEFAULT NULL,
   
   PRIMARY KEY (`course_id`),
   
