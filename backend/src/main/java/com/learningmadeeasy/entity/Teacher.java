@@ -38,7 +38,7 @@ public class Teacher {
 	
 	@OneToOne
 	@JoinColumn(name="teacher_details_id")
-	private Teacher_Details teacher_details;
+	private TeacherDetails teacherDetails;
 
 	
 	public int getTeacherId() {
@@ -79,6 +79,16 @@ public class Teacher {
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
+	
+	
+	public TeacherDetails getTeacherDetails() {
+		return teacherDetails;
+	}
+
+
+	public void setTeacherDetails(TeacherDetails teacherDetails) {
+		this.teacherDetails = teacherDetails;
+	}
 
 
 	public Teacher() {
@@ -90,10 +100,6 @@ public class Teacher {
 		this.name = name;
 		this.email = email;
 	}
-
-	@Override
-	public String toString() {
-		return "Teacher [teacherId=" + teacherId + ", name=" + name + ", email=" + email + ", courses=" + courses + "]";
-	}
-
+	
+	
 }

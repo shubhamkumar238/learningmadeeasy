@@ -41,6 +41,9 @@ public class Course {
 	@JoinColumn(name="course_id") // Uni-directional mapping
 	private List<Question> questions;
 	
+	@Column(name="course_category")
+	private String courseCategory;
+	
 	
 	@ManyToMany()
 	@JoinTable(
@@ -64,9 +67,13 @@ public class Course {
 		
 	}
 
-	public Course(String courseName) {
+	
+	public Course(String courseName, String courseCategory) {
 		this.courseName = courseName;
+		this.courseCategory = courseCategory;
 	}
+
+
 
 	public int getCourseId() {
 		return courseId;
@@ -124,6 +131,16 @@ public class Course {
 		this.ratings = ratings;
 	}
 	
+	public String getCourseCategory() {
+		return courseCategory;
+	}
+
+
+	public void setCourseCategory(String courseCategory) {
+		this.courseCategory = courseCategory;
+	}
+
+
 	public void addVideo(Video newVideo) {
 		
 		if (videos == null) {
