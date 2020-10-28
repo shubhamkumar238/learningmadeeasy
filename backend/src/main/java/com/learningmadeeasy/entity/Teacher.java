@@ -3,6 +3,7 @@ package com.learningmadeeasy.entity;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,7 +40,9 @@ public class Teacher {
 	@OneToOne
 	@JoinColumn(name="teacher_details_id")
 	private TeacherDetails teacherDetails;
-
+	
+	@Embedded
+    private Review review;
 	
 	public int getTeacherId() {
 		return teacherId;
@@ -70,6 +73,16 @@ public class Teacher {
 		this.email = email;
 	}
 
+	
+	public Review getReview() {
+		return review;
+	}
+
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
+
 
 	public List<Course> getCourses() {
 		return courses;
@@ -95,11 +108,11 @@ public class Teacher {
 		
 	}
 
-	
-	public Teacher(String name, String email) {
+
+	public Teacher(String name, String email, Review review) {
 		this.name = name;
 		this.email = email;
+		this.review = review;
 	}
-	
-	
+
 }

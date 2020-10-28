@@ -4,27 +4,27 @@ insert into learning_made_easy.student values(3, "shubham", "email3");
 insert into learning_made_easy.student values(4, "sagar", "email4");
 
 
-insert into learning_made_easy.teacher_details values(1, "about1", "achievements1", "myobjectives1", "myobjectives2", "expert1@@expert2");
-insert into learning_made_easy.teacher_details values(2, "about2", "achievements2", "myobjectives1", "myobjectives2", "expert1@@expert2");
-insert into learning_made_easy.teacher_details values(3, "about3", "achievements3", "myobjectives1", "myobjectives2", "expert1@@expert2");
-insert into learning_made_easy.teacher_details values(4, "about4", "achievements4", "myobjectives1", "myobjectives2", "expert1@@expert2");
+insert into learning_made_easy.teacher_details values(1, "about1", "achievements1", "myobjectives1", "expert1", "expert1@@expert2");
+insert into learning_made_easy.teacher_details values(2, "about2", "achievements2", "myobjectives1", "expert2", "expert1@@expert2");
+insert into learning_made_easy.teacher_details values(3, "about3", "achievements3", "myobjectives1", "expert3", "expert1@@expert2");
+insert into learning_made_easy.teacher_details values(4, "about4", "achievements4", "myobjectives1", "expert4", "expert1@@expert2");
 
 
-insert into learning_made_easy.teacher values(1, "t1", "email1", 1);
-insert into learning_made_easy.teacher values(2, "t2", "email2", 2);
-insert into learning_made_easy.teacher values(3, "t3", "email3", 3);
-insert into learning_made_easy.teacher values(4, "t4", "email4", 4);
+insert into learning_made_easy.teacher values(1, "t1", "email1", 1, 4, "review1", "deepak", "chaudhary", "2017-06-15");
+insert into learning_made_easy.teacher values(2, "t2", "email2", 2, 5, "review2", "shubham", "kumar", "2017-06-15");
+insert into learning_made_easy.teacher values(3, "t3", "email3", 3, 4, "review3", "ravi", "prakas", "2017-06-15");
+insert into learning_made_easy.teacher values(4, "t4", "email4", 4, 4, "review4", "sagar", "jha", "2017-06-15");
 
 insert into learning_made_easy.course_category values("course_category1", "url1");
 insert into learning_made_easy.course_category values("course_category2", "url2");
 
 
-insert into learning_made_easy.course values(1, "c1", 1, "course_category1");
-insert into learning_made_easy.course values(2, "c2", 1, "course_category1");
-insert into learning_made_easy.course values(3, "c3", 1, "course_category1");
-insert into learning_made_easy.course values(4, "c4", 1, "course_category2");
-insert into learning_made_easy.course values(5, "c5", 2, "course_category2");
-insert into learning_made_easy.course values(6, "c6", 2, "course_category2");
+insert into learning_made_easy.course values(1, "c1", 1, "course_category1", "summary1", "requrements1", 4, "review1", "deepak", "chaudhary", "2017-06-15");
+insert into learning_made_easy.course values(2, "c2", 1, "course_category1", "summary2", "requrements2", 5, "review2", "ravi", "prakash", "2017-06-15");
+insert into learning_made_easy.course values(3, "c3", 1, "course_category1", "summary3", "requrements3", 4, "review3", "shubham", "kumar", "2017-06-15");
+insert into learning_made_easy.course values(4, "c4", 1, "course_category2", "summary4", "requrements4", 5, "review4", "sagar", "jha", "2017-06-15");
+insert into learning_made_easy.course values(5, "c5", 2, "course_category2", "summary5", "requrements5", 4, "review5", "bhamar", "pal", "2017-06-15");
+insert into learning_made_easy.course values(6, "c6", 2, "course_category2", "summary6", "requrements6", 4, "review1", "himanshu", "gupta", "2017-06-15");
 
 insert into learning_made_easy.course_student values(1, 1);
 insert into learning_made_easy.course_student values(1, 2);
@@ -40,11 +40,8 @@ insert into learning_made_easy.question values(3, "q3", 1);
 insert into learning_made_easy.answer values(1, 1, "a1");
 insert into learning_made_easy.answer values(2, 1, "a2");
 
-insert into learning_made_easy.rating values(1, 9, 1);
-insert into learning_made_easy.rating values(2, 10, 1);
 
-
-insert into learning_made_easy.video values("url1", 1);
-insert into learning_made_easy.video values("url2", 1);
+insert into learning_made_easy.video values("url1", "videoName1", "videoDescription1", 1, 110);
+insert into learning_made_easy.video values("url2", "videoName2", "videoDescription2", 1, 120);
 
 insert into learning_made_easy.timestamp values(1, 1,"url1", 50);

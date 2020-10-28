@@ -30,6 +30,11 @@ CREATE TABLE `teacher` (
   `name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `teacher_details_id` int(11) DEFAULT NULL,
+  `course_rating` int(11) DEFAULT NULL,
+  `course_review` varchar(150) DEFAULT NULL,
+  `reviewer_first_name` varchar (45) DEFAULT NULL,
+  `reviewer_last_name` varchar (45) DEFAULT NULL,
+  `review_date` date DEFAULT NULL,
   PRIMARY KEY (`teacher_id`),
   
   CONSTRAINT `FK_TEACHER_DETAILS` 
@@ -52,6 +57,13 @@ CREATE TABLE `course` (
   `course_name` varchar(45) DEFAULT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `course_category` varchar(45) DEFAULT NULL,
+  `course_summary` varchar(150) DEFAULT NULL,
+  `requirements` varchar(45) DEFAULT NULL,
+  `course_rating` int(11) DEFAULT NULL,
+  `course_review` varchar(150) DEFAULT NULL,
+  `reviewer_first_name` varchar (45) DEFAULT NULL,
+  `reviewer_last_name` varchar (45) DEFAULT NULL,
+  `review_date` date DEFAULT NULL,
   
   PRIMARY KEY (`course_id`),
   
@@ -88,24 +100,14 @@ CREATE TABLE `course_student` (
 DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video` (
   `video_url` varchar(100) NOT NULL,
+  `video_name` varchar(45) DEFAULT NULL,
+  `video_description` varchar(45) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
   
    PRIMARY KEY (`video_url`),
    
    CONSTRAINT `FK_COURSE2` FOREIGN KEY (`course_id`) 
-   REFERENCES `course` (`course_id`) 
-   ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `rating`;
-CREATE TABLE `rating` (
-  `rating_id` int(11) NOT NULL AUTO_INCREMENT,
-  `course_rating` int(11) DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  
-   PRIMARY KEY (`rating_id`),
-   
-   CONSTRAINT `FK_COURSE3` FOREIGN KEY (`course_id`) 
    REFERENCES `course` (`course_id`) 
    ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
