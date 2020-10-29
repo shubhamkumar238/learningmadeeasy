@@ -14,4 +14,8 @@ public interface TeacherDAOInterface {
 
 	List<Course> allCoursesOfTeacher(int teacherId);
 
+	List<Course> teacherRating(int teacherId);
+
+	List<Teacher> topTeachers();
+
 }

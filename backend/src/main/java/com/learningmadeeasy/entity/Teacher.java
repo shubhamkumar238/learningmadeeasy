@@ -35,7 +35,7 @@ public class Teacher {
 	@Column(name="email")
 	private String email;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy="teacher")
 	private List<Course> courses;
 	
@@ -43,11 +43,10 @@ public class Teacher {
 	@JoinColumn(name="teacher_details_id")
 	private TeacherDetails teacherDetails;
 	
-	
 	@ElementCollection()
     @CollectionTable(name = "review_teacher", joinColumns = @JoinColumn(name = "teacher_id"))
     private List<Review> review;
-	
+
 	public int getTeacherId() {
 		return teacherId;
 	}

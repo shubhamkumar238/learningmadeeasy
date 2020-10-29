@@ -3,6 +3,7 @@ package com.learningmadeeasy.DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,28 @@ public class TeacherDAOImpl implements TeacherDAOInterface {
 		
 		return theTeacher;
 		
+	}
+  
+  @Override
+  @Transactional
+  public List<Course> teacherRating(int teacherId){
+	  
+	  Teacher theTeacher = (Teacher) entityManager.createQuery("from Teacher where teacherId=:teacherId")
+			  					.setParameter("teacherId", teacherId).getSingleResult();
+	  List<Course> theCourses = theTeacher.getCourses();
+	  
+	  System.out.println("testingin DAO " + theCourses);
+	  
+	  return theCourses;
+	  
+  }
+  
+  	@Override
+	public List<Teacher> topTeachers(){
+		
+		List<Teacher> teachersId = entityManager.createQuery("from Teacher").getResultList();
+		
+		return teachersId;
 	}
 
 }
