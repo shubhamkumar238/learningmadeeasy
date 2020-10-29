@@ -35,19 +35,34 @@ public class Teacher {
 	@Column(name="email")
 	private String email;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy="teacher")
 	private List<Course> courses;
 	
 	@OneToOne
 	@JoinColumn(name="teacher_details_id")
 	private TeacherDetails teacherDetails;
+<<<<<<< Updated upstream
 	
 	
 	@ElementCollection()
     @CollectionTable(name = "review_teacher", joinColumns = @JoinColumn(name = "teacher_id"))
     private List<Review> review;
+=======
+>>>>>>> Stashed changes
 	
+	private float teacherRating;
+	
+	public float getTeacherRating() {
+		return teacherRating;
+	}
+
+
+	public void setTeacherRating(float thisTeacherRating) {
+		this.teacherRating = thisTeacherRating;
+	}
+
+
 	public int getTeacherId() {
 		return teacherId;
 	}

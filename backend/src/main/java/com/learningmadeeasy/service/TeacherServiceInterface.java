@@ -1,6 +1,7 @@
 package com.learningmadeeasy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Teacher;
@@ -11,6 +12,10 @@ public interface TeacherServiceInterface {
 
 	List<Course> allCoursesOfTeacher(int teacherId);
   
-  Teacher findTeacherById(int TeacherId);
+    Teacher findTeacherById(int TeacherId);
+
+    Map<String, Object> teacherRating(int teacherId);
+
+	Map<String, Object> topTeachers();
 
 }

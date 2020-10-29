@@ -34,7 +34,6 @@ public class Course {
 	@Column(name="course_name")
 	private String courseName;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
