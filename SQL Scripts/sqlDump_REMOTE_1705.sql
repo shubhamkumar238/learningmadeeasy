@@ -3,19 +3,6 @@ insert into learning_made_easy.student values(2, "ravi", "email2");
 insert into learning_made_easy.student values(3, "shubham", "email3");
 insert into learning_made_easy.student values(4, "sagar", "email4");
 
-<<<<<<< HEAD
-insert into learning_made_easy.teacher_details values(1, "about1", "achievements1", "myobjectives1", "myobjectives2", "expert1@@expert2");
-insert into learning_made_easy.teacher_details values(2, "about2", "achievements2", "myobjectives1", "myobjectives2", "expert1@@expert2");
-insert into learning_made_easy.teacher_details values(3, "about3", "achievements3", "myobjectives1", "myobjectives2", "expert1@@expert2");
-insert into learning_made_easy.teacher_details values(4, "about4", "achievements4", "myobjectives1", "myobjectives2", "expert1@@expert2");
-
-
-insert into learning_made_easy.teacher values(1, "t1", "email1", "1");
-insert into learning_made_easy.teacher values(2, "t2", "email2", "2");
-insert into learning_made_easy.teacher values(3, "t3", "email3", "3");
-insert into learning_made_easy.teacher values(4, "t4", "email4", "4");
-
-=======
 
 insert into learning_made_easy.teacher_details values(1, "about1", "achievements1", "myobjectives1", "expert1", "expert1@@expert2");
 insert into learning_made_easy.teacher_details values(2, "about2", "achievements2", "myobjectives1", "expert2", "expert1@@expert2");
@@ -33,7 +20,6 @@ insert into learning_made_easy.review_teacher values(4, "review1", "deepak", "ch
 insert into learning_made_easy.review_teacher values(5, "review2", "shubham", "kumar", "2017-06-15", 1);
 insert into learning_made_easy.review_teacher values(4, "review3", "ravi", "prakas", "2017-06-15", 1);
 insert into learning_made_easy.review_teacher values(4, "review4", "sagar", "jha", "2017-06-15", 2);
->>>>>>> 96bdcf4036cb5b1619842b3f4ee3d90a98c0039c
 
 insert into learning_made_easy.course_category values("course_category1", "url1");
 insert into learning_made_easy.course_category values("course_category2", "url2");
