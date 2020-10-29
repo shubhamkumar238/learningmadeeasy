@@ -29,16 +29,16 @@ public class Video {
 	private int duration;
 	
 	@Column(name="video_name")
-	private int videoName;
+	private String videoName;
 	
 	@Column(name="video_description")
-	private int videoDescription;
+	private String videoDescription;
 
 	public Video() {
 		
 	}
 	
-	public Video(String videoUrl, int duration, int videoName, int videoDescription) {
+	public Video(String videoUrl, int duration, String videoName, String videoDescription) {
 		this.videoUrl = videoUrl;
 		this.duration = duration;
 		this.videoName = videoName;
@@ -46,19 +46,19 @@ public class Video {
 	}
 
 
-	public int getVideoName() {
+	public String getVideoName() {
 		return videoName;
 	}
 
-	public void setVideoName(int videoName) {
+	public void setVideoName(String videoName) {
 		this.videoName = videoName;
 	}
 
-	public int getVideoDescription() {
+	public String getVideoDescription() {
 		return videoDescription;
 	}
 
-	public void setVideoDescription(int videoDescription) {
+	public void setVideoDescription(String videoDescription) {
 		this.videoDescription = videoDescription;
 	}
 

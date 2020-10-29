@@ -3,13 +3,10 @@ package com.learningmadeeasy.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,8 +65,8 @@ public class Course {
 	@OneToMany(mappedBy="course")
 	private List<Video> videos;
 	
-	
-	@ElementCollection(fetch = FetchType.LAZY)
+
+	@ElementCollection()
     @CollectionTable(name = "review_course", joinColumns = @JoinColumn(name = "course_id"))
     private List<Review> review;	
 	

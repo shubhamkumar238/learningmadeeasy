@@ -43,9 +43,9 @@ public class Teacher {
 	@JoinColumn(name="teacher_details_id")
 	private TeacherDetails teacherDetails;
 	
-
-	@ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "review_teacher", joinColumns = @JoinColumn(name = "course_id"))
+	
+	@ElementCollection()
+    @CollectionTable(name = "review_teacher", joinColumns = @JoinColumn(name = "teacher_id"))
     private List<Review> review;
 	
 	public int getTeacherId() {
