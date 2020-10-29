@@ -2,8 +2,11 @@ package com.learningmadeeasy.entity;
 
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +42,11 @@ public class Teacher {
 	@OneToOne
 	@JoinColumn(name="teacher_details_id")
 	private TeacherDetails teacherDetails;
-
+	
+	
+	@ElementCollection()
+    @CollectionTable(name = "review_teacher", joinColumns = @JoinColumn(name = "teacher_id"))
+    private List<Review> review;
 	
 	public int getTeacherId() {
 		return teacherId;
@@ -71,6 +78,16 @@ public class Teacher {
 	}
 
 
+	public List<Review> getReview() {
+		return review;
+	}
+
+
+	public void setReview(List<Review> review) {
+		this.review = review;
+	}
+
+
 	public List<Course> getCourses() {
 		return courses;
 	}
@@ -95,11 +112,10 @@ public class Teacher {
 		
 	}
 
-	
-	public Teacher(String name, String email) {
+	public Teacher(String name, String email, List<Review> review) {
 		this.name = name;
 		this.email = email;
+		this.review = review;
 	}
-	
-	
+
 }
