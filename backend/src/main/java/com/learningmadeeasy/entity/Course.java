@@ -3,9 +3,13 @@ package com.learningmadeeasy.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,22 +69,23 @@ public class Course {
 	private List<Video> videos;
 	
 	
-	@Embedded
-    private Review review;	
+	@ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "review_course", joinColumns = @JoinColumn(name = "course_id"))
+    private List<Review> review;	
 	
 	public Course() {
 		
 	}
 
-	public Course(String courseName, List<Question> questions, String courseCategory, String courseSummary,
-			String requirements, Review review) {
+	public Course(String courseName, String courseCategory, String courseSummary, String requirements,
+			List<Review> review) {
 		this.courseName = courseName;
-		this.questions = questions;
 		this.courseCategory = courseCategory;
 		this.courseSummary = courseSummary;
 		this.requirements = requirements;
 		this.review = review;
 	}
+
 
 	public String getCourseSummary() {
 		return courseSummary;
@@ -145,17 +150,15 @@ public class Course {
 	public void setVideos(List<Video> videos) {
 		this.videos = videos;
 	}
-	
-	
-	public Review getReview() {
+
+
+	public List<Review> getReview() {
 		return review;
 	}
 
-
-	public void setReview(Review review) {
+	public void setReview(List<Review> review) {
 		this.review = review;
 	}
-
 
 	public String getCourseCategory() {
 		return courseCategory;

@@ -30,11 +30,6 @@ CREATE TABLE `teacher` (
   `name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `teacher_details_id` int(11) DEFAULT NULL,
-  `course_rating` int(11) DEFAULT NULL,
-  `course_review` varchar(150) DEFAULT NULL,
-  `reviewer_first_name` varchar (45) DEFAULT NULL,
-  `reviewer_last_name` varchar (45) DEFAULT NULL,
-  `review_date` date DEFAULT NULL,
   PRIMARY KEY (`teacher_id`),
   
   CONSTRAINT `FK_TEACHER_DETAILS` 
@@ -59,12 +54,6 @@ CREATE TABLE `course` (
   `course_category` varchar(45) DEFAULT NULL,
   `course_summary` varchar(150) DEFAULT NULL,
   `requirements` varchar(45) DEFAULT NULL,
-  `course_rating` int(11) DEFAULT NULL,
-  `course_review` varchar(150) DEFAULT NULL,
-  `reviewer_first_name` varchar (45) DEFAULT NULL,
-  `reviewer_last_name` varchar (45) DEFAULT NULL,
-  `review_date` date DEFAULT NULL,
-  
   PRIMARY KEY (`course_id`),
   
   UNIQUE KEY `TITLE_UNIQUE` (`course_name`),
@@ -77,6 +66,37 @@ CREATE TABLE `course` (
   ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
+
+DROP TABLE IF EXISTS `review_course`;
+CREATE TABLE `review_course` (
+  `rating` int(11) DEFAULT NULL,
+  `review` varchar(150) DEFAULT NULL,
+  `reviewer_first_name` varchar (45) DEFAULT NULL,
+  `reviewer_last_name` varchar (45) DEFAULT NULL,
+  `review_date` date DEFAULT NULL,
+  
+  `course_id` int(11) NOT NULL,
+  
+   CONSTRAINT `FK_COURSE7` FOREIGN KEY (`course_id`)
+   REFERENCES `course` (`course_id`)
+   ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `review_teacher`;
+CREATE TABLE `review_teacher` (
+  `rating` int(11) DEFAULT NULL,
+  `review` varchar(150) DEFAULT NULL,
+  `reviewer_first_name` varchar (45) DEFAULT NULL,
+  `reviewer_last_name` varchar (45) DEFAULT NULL,
+  `review_date` date DEFAULT NULL,
+  
+  `teacher_id` int(11) NOT NULL,
+  
+   CONSTRAINT `FK_TEACHER7` FOREIGN KEY (`teacher_id`)
+   REFERENCES `teacher` (`teacher_id`)
+   ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `course_student`;
 CREATE TABLE `course_student` (
