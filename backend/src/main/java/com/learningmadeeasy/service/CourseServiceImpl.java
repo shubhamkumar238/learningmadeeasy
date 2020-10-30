@@ -1,7 +1,10 @@
 package com.learningmadeeasy.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ public class CourseServiceImpl implements CourseServiceInterface {
 	@Autowired
 	private CourseDAOInterface courseDAOInterface;
 	
+	@Autowired
+	private EntityManager entityManager;
+	
 	@Override
 	@Transactional
 	public List<Course> showAllCourses(){
@@ -29,8 +35,18 @@ public class CourseServiceImpl implements CourseServiceInterface {
 	}
 
 	@Override
+	@Transactional
 	public int saveNewCourse(Map<String, ?> theCourse) {
 		return courseDAOInterface.saveNewCourse(theCourse);
+	}
+	
+	@Override
+	@Transactional
+	public String top10Courses(){
+		
+		List<Object[]> theCourses = courseDAOInterface.top10Courses();
+		
+		return null;
 	}
 	
 

@@ -20,6 +20,7 @@ public class CourseCategoryDAOImpl implements CourseCategoryDAOInterface {
 		List<Object[]> resultset  = entityManager.createQuery("select c.courseCategory,COUNT(c.courseId), cc.categoryUrl from Course c  join CourseCategory cc ON cc.courseCategoryName=c.courseCategory GROUP BY c.courseCategory",Object[].class)
 												 .getResultList();
 		
+		
 		return resultset;
 	}
 	
@@ -49,16 +50,4 @@ public class CourseCategoryDAOImpl implements CourseCategoryDAOInterface {
 		return resultset;
 	}
 	
-	@Override
-	public List<Object[]> top10Courses(){
-		List<Object[]> resultSet = entityManager.createQuery("select c.courseId, c.courseName, avg(r.courseRating) from Course c "
-				+ "join Rating r "
-				+ "on r.courseId = c.courseId "
-				+ "group by r.courseId order by avg(r.courseRating) desc").getResultList();
-		
-		return resultSet;
-	}
-	
-	
-
 }

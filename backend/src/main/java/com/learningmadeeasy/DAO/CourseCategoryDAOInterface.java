@@ -12,6 +12,4 @@ public interface CourseCategoryDAOInterface {
 
 	List<Object[]> getAllCoursesForThisCategory(String categoryName);
 
-	List<Object[]> top10Courses();
-
 }

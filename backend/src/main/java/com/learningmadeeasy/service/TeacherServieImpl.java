@@ -1,6 +1,7 @@
 package com.learningmadeeasy.service;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.learningmadeeasy.DAO.TeacherDAOInterface;
 import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Teacher;
@@ -20,8 +25,6 @@ public class TeacherServieImpl implements TeacherServiceInterface {
 	@Autowired
 	private TeacherDAOInterface teacherDAOInterface;
 	
-	@Autowired
-	private EntityManager entityManager;
 	
 	@Override
 	@Transactional
@@ -42,83 +45,39 @@ public class TeacherServieImpl implements TeacherServiceInterface {
 	}
 	
 	@Override
-	@Transactional
-	public Map<String,Object> teacherRating(int teacherId){
+	public String top10Teachers(){
 		
-		List<Course> theCourses = teacherDAOInterface.teacherRating(teacherId);
+		List<Object[]> info = teacherDAOInterface.top10Teachers();
 		
-		int sz = theCourses.size();
+		ObjectMapper mapper = new ObjectMapper();
+		ArrayNode arrayNode = mapper.createArrayNode();
 		
-		float teacherRating = 0;
-		int count = 0;
-		
-		System.out.println("testing: " + theCourses);
-		
-		for(int i=0;i<sz;i++) {
-			
-			Course currCourse = theCourses.get(i);
-			int currCourseId = currCourse.getCourseId();
-			Object courseRating = entityManager.createQuery("select sum(courseRating) from Rating where courseId=:courseId group by courseId")
-						.setParameter("courseId", currCourseId).getSingleResult();
-			
-			Object tempResult = entityManager.createQuery("select count(courseRating) from Rating where courseId=:courseId group by courseId")
-							.setParameter("courseId", currCourseId).getSingleResult();
-
-			teacherRating+=(Long)courseRating;
-			
-			count+=(Long)tempResult;
-			
+		for(int i=0;i<info.size();i++) {
+			ObjectNode objectNode1 = mapper.createObjectNode();
+			Object[] row = info.get(i);
+	        objectNode1.put("teacherName", (String)row[0]);
+	        objectNode1.put("expertCategory", (String)row[1]);
+	        objectNode1.put("courseCount", (BigInteger)row[2]);
+	        
+	        if(row[3]==null)
+		        objectNode1.put("avgRating", 0);
+	        else
+	        	objectNode1.put("avgRating", (BigDecimal)row[3]);
+   
+	       
+	        arrayNode.add(objectNode1);
 		}
 		
-		teacherRating/=count;
+		String serialized = null;
+		try {
+			serialized = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		
-		Map<String,Object> finalTeacherRating = new HashMap<>();
-		
-		
-		
-		finalTeacherRating.put("Teacher with Teacher id", teacherRating);
-		
-		//System.out.println("DEBUGGING : " + finalTeacherRating);
-		return finalTeacherRating;
+		return serialized;
 	}
 	
-	@Override
-	@Transactional
-	public Map<String,Object> topTeachers(){
-		
-		List<Teacher> theTeachersId = teacherDAOInterface.topTeachers();
-		
-		int size = theTeachersId.size();
-		int theTeacherRating = 0;
-		
-		for(int i=0;i<size;i++) {
-			
-			theTeacherRating = 0;
-			
-			List<Course> theCourses = entityManager.createQuery("from Course where courseId=:courseId")
-								.setParameter("courseId", theTeachersId.get(i).getCourses()).getResultList();
-			
-			for(int j=0;j<theCourses.size();j++) {
-				
-				Object tempResult = entityManager.createQuery("select avg(courseRating) from Rating where courseId=:courseId")
-							.setParameter("courseId", theCourses.get(j).getCourseId()).getSingleResult();
-				
-				theTeacherRating+=(Long)tempResult;
-				
-			}
-			
-			float thisTeacherRating = theTeacherRating/theCourses.size();
-			
-			theTeachersId.get(i).setTeacherRating(thisTeacherRating);
-			
-			System.out.println("teacher with teacher id :" + theTeachersId.get(i).getTeacherId() + " has rating - " + theTeachersId.get(i).getTeacherRating());
-			
-			
-		}
-		return null;
-		
-			
-		
-	}
-
+	
+	
 }

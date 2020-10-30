@@ -44,16 +44,14 @@ public class TeacherController {
 		return teacherserviceinterface.allCoursesOfTeacher(teacherId);
 	}
 	
-	@GetMapping("/rating/{teacherId}")
-	public Map<String,Object> teacherRating(@PathVariable int teacherId){
-		return teacherserviceinterface.teacherRating(teacherId);
-		
+	@GetMapping("/top10Teachers")
+	public String top10Teachers(){
+		return teacherserviceinterface.top10Teachers();
 	}
 	
-	@PostMapping("/topTeachers")
-	public Map<String,Object> topTeachers(){
-		return teacherserviceinterface.topTeachers();
-	}
+	
+	
+
 	
 	
 }

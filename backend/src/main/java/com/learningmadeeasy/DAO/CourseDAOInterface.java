@@ -13,6 +13,8 @@ public interface CourseDAOInterface {
 
 	int saveNewCourse(Map<String, ?> theCourse);
 
+	List<Object[]> top10Courses();
+
 	
 	
 
