@@ -13,4 +13,6 @@ public interface CourseServiceInterface {
 
 	int saveNewCourse(Map<String, ?> theCourse);
 
+	String top10Courses();
+
 }

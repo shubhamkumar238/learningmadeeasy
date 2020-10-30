@@ -2,6 +2,7 @@
 package com.learningmadeeasy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Teacher;
@@ -14,8 +15,6 @@ public interface TeacherDAOInterface {
 
 	List<Course> allCoursesOfTeacher(int teacherId);
 
-	List<Course> teacherRating(int teacherId);
-
-	List<Teacher> topTeachers();
+	List<Object[]> top10Teachers();	
 
 }

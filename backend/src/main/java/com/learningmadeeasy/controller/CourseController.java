@@ -18,7 +18,7 @@ import com.learningmadeeasy.service.TeacherServiceInterface;
 
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/courses")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CourseController {
 	
@@ -26,7 +26,7 @@ public class CourseController {
 	private CourseServiceInterface courseserviceinterface;
 	
 	
-	@GetMapping("/courses")
+	@GetMapping("/")
 	public List<Course> ShowAllCourses(){
 		
 		return courseserviceinterface.showAllCourses();
@@ -37,11 +37,16 @@ public class CourseController {
 		return courseserviceinterface.showParticularCourse(courseId);
 	}
 	
-	@PostMapping("/courses")
+	@PostMapping("/create")
 	public int CreateCourse(@RequestBody Map<String,?> theCourse) {
 		
 		return courseserviceinterface.saveNewCourse(theCourse);
 		
+	}
+	
+	@GetMapping("/top10Courses")
+	public String top10Courses(){
+		return courseserviceinterface.top10Courses();
 	}
 	
 	

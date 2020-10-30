@@ -13,7 +13,7 @@ import com.learningmadeeasy.service.CourseCategoryServiceInterface;
 @RestController
 @RequestMapping("/categories")
 //@CrossOrigin(origins = "http://localhost:4200")
-public class CourseCategory {
+public class CourseCategoryController {
 	
 	@Autowired
 	private CourseCategoryServiceInterface courseCategoryServiceInterface;
@@ -21,7 +21,7 @@ public class CourseCategory {
 	//used map strategy for serialization
 	//shows list of available categories along with other details
 	@GetMapping("/")
-	public Map<String,Object> showCategories(){
+	public String showCategories(){
 		
 		return courseCategoryServiceInterface.showCategories();
 		
@@ -32,11 +32,6 @@ public class CourseCategory {
 	public Map<String,Object> getAllCoursesForThisCategory(@PathVariable String categoryName){
 		
 		return courseCategoryServiceInterface.getAllCoursesForThisCategory(categoryName);
-	}
-	
-	@GetMapping("/top10Courses")
-	public Map<String,Object> top10Courses(){
-		return courseCategoryServiceInterface.top10Courses();
 	}
 	
 	

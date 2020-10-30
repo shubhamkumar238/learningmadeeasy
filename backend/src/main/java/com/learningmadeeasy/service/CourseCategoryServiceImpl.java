@@ -1,5 +1,6 @@
 package com.learningmadeeasy.service;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.learningmadeeasy.DAO.CourseCategoryDAOInterface;
 
 @Service
@@ -22,26 +27,32 @@ public class CourseCategoryServiceImpl implements CourseCategoryServiceInterface
 	private EntityManager entityManager;
 	
 	@Override
-	public Map<String,Object> showCategories() {
+	public String showCategories() {
 		
-		HashMap<String,Object> tempMap = new HashMap<>();
+		List<Object[]> info = courseCategoryDAOinterface.showCategories();
+				
+		ObjectMapper mapper = new ObjectMapper();
+		ArrayNode arrayNode = mapper.createArrayNode();
 		
-		List<Object[]> result = courseCategoryDAOinterface.showCategories();
+		for(int i=0;i<info.size();i++) {
+			ObjectNode objectNode1 = mapper.createObjectNode();
+			Object[] row = info.get(i);
+	        objectNode1.put("categoryUrl", (String)row[2]);
+	        objectNode1.put("courseCategory", (String)row[0]);
+	        objectNode1.put("coursesUnderCategoryCount", (long)row[1]);
+   
+	       
+	        arrayNode.add(objectNode1);
+		}
 		
-		int size = result.size();
+		String serialized = null;
+		try {
+			serialized = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		
-		for(int i=0;i<result.size() && i<10;i++) {
-			HashMap<String,Object> tempMap2 = new HashMap<>();
-			Object[] temp = result.get(i);
-			
-			tempMap2.put("courseCategory", temp[0]);
-			tempMap2.put("coursesUnderCategoryCount", temp[1]);
-			tempMap2.put("categoryUrl", temp[2]);
-			
-			
-			tempMap.put("Categorydetails"+(size-i), tempMap2);
-		}	
-		return tempMap;
+		return serialized;
 		
 	}
 
@@ -119,29 +130,6 @@ public class CourseCategoryServiceImpl implements CourseCategoryServiceInterface
 			
 		}
 	
-		return tempMap;
-	}
-	
-	@Override
-	public Map<String,Object> top10Courses(){
-		
-		List<Object[]> result = courseCategoryDAOinterface.top10Courses();
-		
-		int size = result.size();
-		
-		HashMap<String,Object>tempMap = new HashMap<>();
-		for(int i=0;i<size;i++) {
-			
-			HashMap<String,Object> tempMap2 = new HashMap<>();
-			Object[] temp = result.get(i);
-			
-			tempMap2.put("courseId", temp[0]);
-			tempMap2.put("courseName", temp[1]);
-			tempMap2.put("Average course rating", temp[2]);
-			
-			tempMap.put("Detail No. " + (i+1), tempMap2);
-		}
-		
 		return tempMap;
 	}
 }

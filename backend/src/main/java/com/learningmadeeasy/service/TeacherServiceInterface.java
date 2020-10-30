@@ -14,8 +14,6 @@ public interface TeacherServiceInterface {
   
     Teacher findTeacherById(int TeacherId);
 
-    Map<String, Object> teacherRating(int teacherId);
-
-	Map<String, Object> topTeachers();
+	String top10Teachers();
 
 }

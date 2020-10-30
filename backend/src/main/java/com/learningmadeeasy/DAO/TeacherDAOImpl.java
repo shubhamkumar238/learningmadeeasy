@@ -1,9 +1,9 @@
 package com.learningmadeeasy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class TeacherDAOImpl implements TeacherDAOInterface {
 		return response;
 	}
   
-  @Override
+	@Override
 	public Teacher findTeacherById(int teacherId) {
 		
 		// get the current hibernate session
@@ -51,25 +51,19 @@ public class TeacherDAOImpl implements TeacherDAOInterface {
 	}
   
   @Override
-  @Transactional
-  public List<Course> teacherRating(int teacherId){
+  public List<Object[]> top10Teachers(){
 	  
-	  Teacher theTeacher = (Teacher) entityManager.createQuery("from Teacher where teacherId=:teacherId")
-			  					.setParameter("teacherId", teacherId).getSingleResult();
-	  List<Course> theCourses = theTeacher.getCourses();
+	  String query ="select t.name, td.expert_category, (select count(*) from Course c where c.teacher_id=t.teacher_id) , \r\n"
+	  		+ "(select avg(rt.rating) from review_teacher rt where rt.teacher_id=t.teacher_id) teacher_score \r\n"
+	  		+ "from teacher t join teacher_details td on td.teacher_details_id=t.teacher_details_id order by teacher_score desc limit 10";
 	  
-	  System.out.println("testingin DAO " + theCourses);
-	  
-	  return theCourses;
-	  
+	  List<Object[]> resultSet = entityManager.createNativeQuery(query).getResultList();
+		
+	  return resultSet;
   }
   
-  	@Override
-	public List<Teacher> topTeachers(){
-		
-		List<Teacher> teachersId = entityManager.createQuery("from Teacher").getResultList();
-		
-		return teachersId;
-	}
+  
+  
+  
 
 }
