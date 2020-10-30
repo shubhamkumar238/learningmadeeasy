@@ -9,8 +9,12 @@ public interface TeacherServiceInterface {
 
 	void save(Teacher theTeacher);
 
-	List<Course> allCoursesOfTeacher(int teacherId);
+	String allCoursesOfTeacher(int teacherId);
   
-  Teacher findTeacherById(int TeacherId);
+    Teacher findTeacherById(int TeacherId);
+
+    String getAllTeachers();
+
+    String getTeacherDetail(int teacherId);
 
 }

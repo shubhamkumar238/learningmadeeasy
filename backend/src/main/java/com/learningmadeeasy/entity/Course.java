@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -52,6 +55,11 @@ public class Course {
 	@Column(name="requirements")
 	private String requirements;
 	
+	
+	//LazyCollection.EXTRA = .size() and .contains() won't initialize the whole collection so 
+	//it is a performance enhancement
+		
+	@LazyCollection(LazyCollectionOption.EXTRA)
 	@JsonIgnore
 	@ManyToMany()
 	@JoinTable(
@@ -60,6 +68,7 @@ public class Course {
 			inverseJoinColumns=@JoinColumn(name="student_id")
 			)
 	private List<Student> students;
+	
 	
 	
 	@OneToMany(mappedBy="course")

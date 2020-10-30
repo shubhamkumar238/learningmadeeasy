@@ -26,11 +26,11 @@ public class VideoDAOImpl implements VideoDAOInterface {
 		String videoUrl = (String) video.get("video_url");
 		int courseId = (int)video.get("course_id");
 		
-		Course currentCourse = currentSession.get(Course.class, courseId);
-		
-		Video videoObject = new Video(videoUrl);
+		/*Course currentCourse = currentSession.get(Course.class, courseId);
+		Video videoObject = new Video(videoUrl, 100);
 		currentSession.save(videoObject);
 		currentCourse.addVideo(videoObject);
+		*/
 	}
 
 	@Override

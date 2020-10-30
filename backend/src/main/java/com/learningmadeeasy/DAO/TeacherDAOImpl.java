@@ -3,6 +3,7 @@ package com.learningmadeeasy.DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,23 @@ public class TeacherDAOImpl implements TeacherDAOInterface {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Course> allCoursesOfTeacher(int teacherId) {
+	public List<Object[]> allCoursesOfTeacher(int teacherId) {
 		
-		Session currentSession = entityManager.unwrap(Session.class);
+		String nativeSqlQuery = "select c.course_id, c.course_name, t.name , (select count(*) from course_student cs  where cs.course_id=c.course_id ), \r\n" + 
+				"(select count(*) from review_course cr  where cr.course_id=c.course_id ), (select avg(cr.rating) from review_course cr  where cr.course_id=c.course_id )\r\n" + 
+				" from course c join \r\n" + 
+				"teacher t on t.teacher_id=c.teacher_id where t.teacher_id=:teacherId";
 		
-		Teacher currentTeacher = currentSession.get(Teacher.class, teacherId);
-		List<Course> response = currentTeacher.getCourses();
+		Query query = entityManager.createNativeQuery(nativeSqlQuery);
+		query.setParameter("teacherId", teacherId);
+		List<Object[]> response= query.getResultList();
+		
 		return response;
 	}
   
-  @Override
+    @Override
 	public Teacher findTeacherById(int teacherId) {
 		
 		// get the current hibernate session
@@ -44,9 +51,24 @@ public class TeacherDAOImpl implements TeacherDAOInterface {
 		
 		// get the Teacher
 		Teacher theTeacher  = currentSession.get(Teacher.class, teacherId);
-		
 		return theTeacher;
 		
+	}
+
+	@Override
+	public List<Object[]> getAllTeachers() {
+		
+		List<Object[]> allTeachers = entityManager.createQuery("select tr.teacherId, tr.name, tr.teacherDetails.expertCategory from Teacher tr", Object[].class)
+								     .getResultList();
+		return allTeachers;
+	}
+
+	@Override
+	public List<Object[]> getTeacherDetail(int teacherId) {
+		List<Object[]> teacherDetails = entityManager.createQuery("select td.teacherDetails.about, td.teacherDetails.achievements, td.teacherDetails.myobjectives from Teacher td where td.teacherId=:teacherId", Object[].class)
+				                        .setParameter("teacherId", teacherId)
+				                        .getResultList();
+		return teacherDetails;
 	}
 
 }
