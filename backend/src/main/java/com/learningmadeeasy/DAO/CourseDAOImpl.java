@@ -62,6 +62,19 @@ public class CourseDAOImpl implements CourseDAOInterface {
 		return newCourse.getCourseId();
 
 	}
+	
+	@Override
+	public List<Object[]> top10Courses(){
+		
+		String query = "select c.course_id, c.course_name, t.name , (select count(*) from course_student cs  where cs.course_id=c.course_id ), \r\n"
+				+ "(select count(*) from review_course cr  where cr.course_id=c.course_id ) , (select avg(cr.rating) from review_course cr  where cr.course_id=c.course_id ) as avgRating\r\n"
+				+ " from course c 	 join \r\n"
+				+ "teacher t on t.teacher_id=c.teacher_id order by avgRating desc limit 10 ;";
+		List<Object[]> resultSet = entityManager.createNativeQuery(query).getResultList();
+		
+		return resultSet;
+		
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

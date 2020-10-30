@@ -12,7 +12,7 @@ public class CourseCategory {
 	@Column(name="course_category_name")
 	private String courseCategoryName;
 	
-	@Column(name="category_url")
+	@Column(name="course_url")
 	private String categoryUrl;
 
 	public String getCourseCategoryName() {

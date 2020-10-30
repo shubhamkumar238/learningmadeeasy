@@ -1,6 +1,11 @@
 package com.learningmadeeasy.service;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,5 +96,41 @@ public class TeacherServieImpl implements TeacherServiceInterface {
 		}
         return serialized;
 	}
-
+	
+	@Override
+	public String top10Teachers(){
+		
+		List<Object[]> info = teacherDAOInterface.top10Teachers();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		ArrayNode arrayNode = mapper.createArrayNode();
+		
+		for(int i=0;i<info.size();i++) {
+			ObjectNode objectNode1 = mapper.createObjectNode();
+			Object[] row = info.get(i);
+	        objectNode1.put("teacherName", (String)row[0]);
+	        objectNode1.put("expertCategory", (String)row[1]);
+	        objectNode1.put("courseCount", (BigInteger)row[2]);
+	        
+	        if(row[3]==null)
+		        objectNode1.put("avgRating", 0);
+	        else
+	        	objectNode1.put("avgRating", (BigDecimal)row[3]);
+   
+	       
+	        arrayNode.add(objectNode1);
+		}
+		
+		String serialized = null;
+		try {
+			serialized = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		return serialized;
+	}
+	
+	
+	
 }

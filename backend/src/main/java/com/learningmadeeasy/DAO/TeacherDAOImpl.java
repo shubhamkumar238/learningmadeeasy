@@ -1,6 +1,7 @@
 package com.learningmadeeasy.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -43,7 +44,7 @@ public class TeacherDAOImpl implements TeacherDAOInterface {
 		return response;
 	}
   
-    @Override
+	@Override
 	public Teacher findTeacherById(int teacherId) {
 		
 		// get the current hibernate session
@@ -54,6 +55,22 @@ public class TeacherDAOImpl implements TeacherDAOInterface {
 		return theTeacher;
 		
 	}
+  
+  @Override
+  public List<Object[]> top10Teachers(){
+	  
+	  String query ="select t.name, td.expert_category, (select count(*) from Course c where c.teacher_id=t.teacher_id) , \r\n"
+	  		+ "(select avg(rt.rating) from review_teacher rt where rt.teacher_id=t.teacher_id) teacher_score \r\n"
+	  		+ "from teacher t join teacher_details td on td.teacher_details_id=t.teacher_details_id order by teacher_score desc limit 10";
+	  
+	  List<Object[]> resultSet = entityManager.createNativeQuery(query).getResultList();
+		
+	  return resultSet;
+  }
+  
+  
+  
+  
 
 	@Override
 	public List<Object[]> getAllTeachers() {

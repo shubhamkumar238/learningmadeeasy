@@ -12,8 +12,9 @@ public interface CourseServiceInterface {
 
 	int saveNewCourse(Map<String, ?> theCourse);
 
+	String top10Courses();
+
 	String getCourseFeatures(int courseId);
 
 	String getSimilarCourseForCategory(String courseCategory);
-
 }

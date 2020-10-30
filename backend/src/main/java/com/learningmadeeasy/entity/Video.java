@@ -46,6 +46,10 @@ public class Video {
 	}
 
 
+	public Video(String videoUrl2) {
+		this.videoUrl = videoUrl2;
+	}
+
 	public String getVideoName() {
 		return videoName;
 	}

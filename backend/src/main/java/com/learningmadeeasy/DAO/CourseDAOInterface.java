@@ -13,6 +13,9 @@ public interface CourseDAOInterface {
 
 	int saveNewCourse(Map<String, ?> theCourse);
 
+	List<Object[]> top10Courses();
+
+
 	List<Object[]> getCourseFeatures(int courseId);
 
 	List<Object[]> getSimilarCourseForCategory(String courseCategory);
