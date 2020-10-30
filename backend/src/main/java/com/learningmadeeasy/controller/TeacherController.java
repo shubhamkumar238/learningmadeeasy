@@ -17,6 +17,7 @@ import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.entity.Teacher;
 import com.learningmadeeasy.service.TeacherServiceInterface;
 
+
 @RestController
 @RequestMapping("/teachers")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,18 +28,11 @@ public class TeacherController {
 
 	@PostMapping("/")
 	public Teacher createTeacher(@RequestBody Teacher theTeacher) {
-		
-		// also just in case they pass an id in JSON ... set id to 0
-		// this is to force a save of new item ... instead of update
-		
 		theTeacher.setTeacherId(0);
-		
 		teacherserviceinterface.save(theTeacher);
-		
-		
 		return theTeacher;
 	}
-	
+
 	@GetMapping("/courses/{teacherId}")
 	public List<Course> allCoursesOfTeacher(@PathVariable int teacherId){
 		return teacherserviceinterface.allCoursesOfTeacher(teacherId);
@@ -52,7 +46,26 @@ public class TeacherController {
 	
 	
 
+	@GetMapping("/teacher/{teacherId}")
+	public Teacher getSingleTeacher(@PathVariable int teacherId) {
+		return teacherserviceinterface.findTeacherById(teacherId);
+	}
 	
+	@GetMapping("/teachersCourses/{teacherId}")
+	public String allCoursesOfTeacher(@PathVariable int teacherId){
+		return teacherserviceinterface.allCoursesOfTeacher(teacherId);
+	}
+	
+	@GetMapping(value="/teachers",  produces={ "application/json" })
+	public String getAllTeachers() {
+		return teacherserviceinterface.getAllTeachers();
+	}
+	
+	// DON'T USE THIS API
+	@GetMapping(value="/teacherDetails/{teacherId}", produces={ "application/json" })
+	public String getTeacherDetail(@PathVariable int teacherId){
+		return teacherserviceinterface.getTeacherDetail(teacherId);
+	}
 	
 }
 

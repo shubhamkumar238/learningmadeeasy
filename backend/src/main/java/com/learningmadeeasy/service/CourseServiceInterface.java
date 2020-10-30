@@ -1,13 +1,12 @@
 package com.learningmadeeasy.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.learningmadeeasy.entity.Course;
 
 public interface CourseServiceInterface {
 
-	List<Course> showAllCourses();
+	String showAllCourses();
 
 	Course showParticularCourse(int courseId);
 
@@ -15,4 +14,7 @@ public interface CourseServiceInterface {
 
 	String top10Courses();
 
+	String getCourseFeatures(int courseId);
+
+	String getSimilarCourseForCategory(String courseCategory);
 }

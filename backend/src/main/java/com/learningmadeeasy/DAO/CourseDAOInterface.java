@@ -7,7 +7,7 @@ import com.learningmadeeasy.entity.Course;
 
 public interface CourseDAOInterface {
 
-	List<Course> showAllCourses();
+	List<Object[]> showAllCourses();
 
 	Course showParticularCourse(int courseId);
 
@@ -15,7 +15,9 @@ public interface CourseDAOInterface {
 
 	List<Object[]> top10Courses();
 
-	
-	
+
+	List<Object[]> getCourseFeatures(int courseId);
+
+	List<Object[]> getSimilarCourseForCategory(String courseCategory);
 
 }
