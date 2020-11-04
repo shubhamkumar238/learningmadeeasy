@@ -10,6 +10,7 @@ import { FeaturedCourseComponent } from './featured-course/featured-course.compo
 import { FeaturedTeacherComponent } from './featured-teacher/featured-teacher.component';
 import { EventsComponent } from './events/events.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     HomepageComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
