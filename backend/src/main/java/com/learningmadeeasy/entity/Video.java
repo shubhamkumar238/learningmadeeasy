@@ -24,13 +24,54 @@ public class Video {
 	@ManyToOne
 	@JoinColumn(name="course_id")
 	private Course course;
+	
+	@Column(name="duration")
+	private int duration;
+	
+	@Column(name="video_name")
+	private String videoName;
+	
+	@Column(name="video_description")
+	private String videoDescription;
 
 	public Video() {
 		
 	}
 	
-	public Video(String videoUrl) {
+	public Video(String videoUrl, int duration, String videoName, String videoDescription) {
 		this.videoUrl = videoUrl;
+		this.duration = duration;
+		this.videoName = videoName;
+		this.videoDescription = videoDescription;
+	}
+
+
+	public Video(String videoUrl2) {
+		this.videoUrl = videoUrl2;
+	}
+
+	public String getVideoName() {
+		return videoName;
+	}
+
+	public void setVideoName(String videoName) {
+		this.videoName = videoName;
+	}
+
+	public String getVideoDescription() {
+		return videoDescription;
+	}
+
+	public void setVideoDescription(String videoDescription) {
+		this.videoDescription = videoDescription;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 	public String getVideoUrl() {
@@ -47,11 +88,6 @@ public class Video {
 
 	public void setCourse(Course course) {
 		this.course = course;
-	}
-	
-	@Override
-	public String toString() {
-		return "Video [videoUrl=" + videoUrl + ", course=" + course + "]";
 	}
 	
 }	

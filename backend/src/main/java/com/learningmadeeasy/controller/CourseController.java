@@ -1,6 +1,5 @@
 package com.learningmadeeasy.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,36 +13,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learningmadeeasy.entity.Course;
 import com.learningmadeeasy.service.CourseServiceInterface;
-import com.learningmadeeasy.service.TeacherServiceInterface;
 
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/courses")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CourseController {
 	
 	@Autowired
-	private CourseServiceInterface courseserviceinterface;
-	
+	private CourseServiceInterface courseServiceInterface;
 	
 	@GetMapping("/courses")
-	public List<Course> ShowAllCourses(){
-		
-		return courseserviceinterface.showAllCourses();
+	public String ShowAllCourses(){
+		return courseServiceInterface.showAllCourses();
 	}
 	
 	@GetMapping("/courses/{courseId}")
 	public Course ShowParticularCourse(@PathVariable int courseId) {
-		return courseserviceinterface.showParticularCourse(courseId);
+		return courseServiceInterface.showParticularCourse(courseId);
 	}
 	
-	@PostMapping("/courses")
+	@PostMapping("/create")
 	public int CreateCourse(@RequestBody Map<String,?> theCourse) {
-		
-		return courseserviceinterface.saveNewCourse(theCourse);
-		
+		return courseServiceInterface.saveNewCourse(theCourse);
 	}
 	
+	@GetMapping("/top10Courses")
+	public String top10Courses(){
+		return courseServiceInterface.top10Courses();
+	}
 	
+	@GetMapping("/timeInformation/{courseId}")
+	public String getCourseFeatures(@PathVariable int courseId){
+		return courseServiceInterface.getCourseFeatures(courseId);
+	}
+	
+	@GetMapping("/similarCourse/{courseCategory}")
+	public String getSimilarCourseForCategory(@PathVariable String courseCategory) {
+		return courseServiceInterface.getSimilarCourseForCategory(courseCategory);
+	}
 	
 }

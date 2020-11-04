@@ -3,7 +3,9 @@ package com.learningmadeeasy.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -31,17 +37,29 @@ public class Course {
 	@Column(name="course_name")
 	private String courseName;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
-	
 	
 	@OneToMany
 	@JoinColumn(name="course_id") // Uni-directional mapping
 	private List<Question> questions;
 	
+	@Column(name="course_category")
+	private String courseCategory;
 	
+	@Column(name="course_summary")
+	private String courseSummary;
+	
+	@Column(name="requirements")
+	private String requirements;
+	
+	
+	//LazyCollection.EXTRA = .size() and .contains() won't initialize the whole collection so 
+	//it is a performance enhancement
+		
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	@JsonIgnore
 	@ManyToMany()
 	@JoinTable(
 			name="course_student",
@@ -51,21 +69,43 @@ public class Course {
 	private List<Student> students;
 	
 	
+	
 	@OneToMany(mappedBy="course")
 	private List<Video> videos;
 	
-	
-	@OneToMany
-	@JoinColumn(name="course_id")
-	private List<Rating> ratings;
-	
+
+	@ElementCollection()
+    @CollectionTable(name = "review_course", joinColumns = @JoinColumn(name = "course_id"))
+    private List<Review> review;	
 	
 	public Course() {
 		
 	}
 
-	public Course(String courseName) {
+	public Course(String courseName, String courseCategory, String courseSummary, String requirements,
+			List<Review> review) {
 		this.courseName = courseName;
+		this.courseCategory = courseCategory;
+		this.courseSummary = courseSummary;
+		this.requirements = requirements;
+		this.review = review;
+	}
+
+
+	public String getCourseSummary() {
+		return courseSummary;
+	}
+
+	public void setCourseSummary(String courseSummary) {
+		this.courseSummary = courseSummary;
+	}
+
+	public String getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(String requirements) {
+		this.requirements = requirements;
 	}
 
 	public int getCourseId() {
@@ -116,14 +156,25 @@ public class Course {
 		this.videos = videos;
 	}
 
-	public List<Rating> getRatings() {
-		return ratings;
+
+	public List<Review> getReview() {
+		return review;
 	}
 
-	public void setRatings(List<Rating> ratings) {
-		this.ratings = ratings;
+	public void setReview(List<Review> review) {
+		this.review = review;
 	}
-	
+
+	public String getCourseCategory() {
+		return courseCategory;
+	}
+
+
+	public void setCourseCategory(String courseCategory) {
+		this.courseCategory = courseCategory;
+	}
+
+
 	public void addVideo(Video newVideo) {
 		
 		if (videos == null) {

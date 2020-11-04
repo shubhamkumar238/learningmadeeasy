@@ -20,11 +20,28 @@ public class Rating {
 	@Column(name="course_rating")
 	private int courseRating;
 	
+	@Column(name="course_id")
+	private int courseId;
+	
 	
 	public Rating() {
 		
 	}
 	
+	
+	
+	public int getCourseId() {
+		return courseId;
+	}
+
+
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+
+
+
 	public Rating(int courseRating) {
 		this.courseRating = courseRating;
 	}

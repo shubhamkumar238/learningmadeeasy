@@ -12,21 +12,48 @@ CREATE TABLE `student` (
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `teacher_details`;
+CREATE TABLE `teacher_details` (
+  `teacher_details_id` int(11) NOT NULL AUTO_INCREMENT,
+  `about` varchar(400) NOT NULL,
+  `achievements` varchar(400) NOT NULL,
+  `myobjectives` varchar(400) NOT NULL,
+  `expert_category` varchar(45) NOT NULL,
+  `extra_category` varchar(150) NOT NULL,
+  PRIMARY KEY (`teacher_details_id`)
+  
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `teacher_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`teacher_id`)
+  `teacher_details_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`teacher_id`),
+  
+  CONSTRAINT `FK_TEACHER_DETAILS` 
+  FOREIGN KEY (`teacher_details_id`) 
+  REFERENCES `teacher_details` (`teacher_details_id`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `course_category`;
+CREATE TABLE `course_category` (
+  `course_category_name` varchar(45) NOT NULL,
+  `course_url` varchar(45) NOT NULL,
+  PRIMARY KEY (`course_category_name`)
+ 
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
 
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
   `course_id` int(11) NOT NULL AUTO_INCREMENT,
   `course_name` varchar(45) DEFAULT NULL,
   `teacher_id` int(11) DEFAULT NULL,
-  
+  `course_category` varchar(45) DEFAULT NULL,
+  `course_summary` varchar(150) DEFAULT NULL,
+  `requirements` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`course_id`),
   
   UNIQUE KEY `TITLE_UNIQUE` (`course_name`),
@@ -39,6 +66,37 @@ CREATE TABLE `course` (
   ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
+
+DROP TABLE IF EXISTS `review_course`;
+CREATE TABLE `review_course` (
+  `rating` int(11) DEFAULT NULL,
+  `review` varchar(150) DEFAULT NULL,
+  `reviewer_first_name` varchar (45) DEFAULT NULL,
+  `reviewer_last_name` varchar (45) DEFAULT NULL,
+  `review_date` date DEFAULT NULL,
+  
+  `course_id` int(11) NOT NULL,
+  
+   CONSTRAINT `FK_COURSE7` FOREIGN KEY (`course_id`)
+   REFERENCES `course` (`course_id`)
+   ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `review_teacher`;
+CREATE TABLE `review_teacher` (
+  `rating` int(11) DEFAULT NULL,
+  `review` varchar(150) DEFAULT NULL,
+  `reviewer_first_name` varchar (45) DEFAULT NULL,
+  `reviewer_last_name` varchar (45) DEFAULT NULL,
+  `review_date` date DEFAULT NULL,
+  
+  `teacher_id` int(11) NOT NULL,
+  
+   CONSTRAINT `FK_TEACHER7` FOREIGN KEY (`teacher_id`)
+   REFERENCES `teacher` (`teacher_id`)
+   ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `course_student`;
 CREATE TABLE `course_student` (
@@ -62,24 +120,14 @@ CREATE TABLE `course_student` (
 DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video` (
   `video_url` varchar(100) NOT NULL,
+  `video_name` varchar(45) DEFAULT NULL,
+  `video_description` varchar(45) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
   
    PRIMARY KEY (`video_url`),
    
    CONSTRAINT `FK_COURSE2` FOREIGN KEY (`course_id`) 
-   REFERENCES `course` (`course_id`) 
-   ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `rating`;
-CREATE TABLE `rating` (
-  `rating_id` int(11) NOT NULL AUTO_INCREMENT,
-  `course_rating` int(11) DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  
-   PRIMARY KEY (`rating_id`),
-   
-   CONSTRAINT `FK_COURSE3` FOREIGN KEY (`course_id`) 
    REFERENCES `course` (`course_id`) 
    ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -116,3 +164,6 @@ CREATE TABLE `answer` (
   REFERENCES `question` (`question_id`) 
   ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+
+
